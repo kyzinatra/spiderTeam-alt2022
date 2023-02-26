@@ -1,8 +1,17 @@
 .header {
-  display: flex;
-  gap: 50px;
+	display: flex;
+	align-items: center;
+	gap: 50px;
+}
+.mapid {
+	font-weight: 500;
+}
+.main {
+	margin-top: 35px;
 }
 
-.main {
-  margin-top: 35px;
+@media (prefers-color-scheme: dark) {
+	.mapid {
+		color: var(--main-color);
+	}
 }
