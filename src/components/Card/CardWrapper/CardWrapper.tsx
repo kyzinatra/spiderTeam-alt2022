@@ -14,7 +14,7 @@ interface ICardWrapper {
 }
 
 export const CardWrapper: FC<ICardWrapper> = ({ cell, index, isUpFocus }) => {
-  const cssVars = { "--cell-length": cell.length - 1 } as object;
+  const cssVars = { "--cell-length": (cell?.length || 1) - 1 } as object;
   const dragId = useAppSelector(s => s.cards.dragId);
   // prettier-ignore
   const { setNodeRef, over, isOver: isElOver } = useDroppable({id: index});
@@ -23,7 +23,7 @@ export const CardWrapper: FC<ICardWrapper> = ({ cell, index, isUpFocus }) => {
 
   return (
     <>
-      {cell.length ? (
+      {cell?.length ? (
         <div className={wraperrClass} style={cssVars} ref={setNodeRef}>
           <Card isUpFocus={isUpFocus} bottomCards={cell} deepIndex={0} index={index} />
         </div>

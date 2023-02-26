@@ -29,7 +29,12 @@ export const RecordsCard: FC<IRecordsCard> = ({ displayName, creator, steps, len
         .then(res => {
           if (!res.exists()) throw new Error("Не удалось получить результат");
           const val = res.val() as TDBRecord;
-          localStorage.setItem(LOCAL_CARDS, JSON.stringify(val.map));
+          let map = [...(val.map || [])];
+          console.log(map?.length, 1);
+          for (let i = 0; i < (map?.length || 0); i++) {
+            map[i] = map[i] || [];
+          }
+          localStorage.setItem(LOCAL_CARDS, JSON.stringify(map?.map(a => a || [])));
           localStorage.setItem(CREATOR, val.creator);
           localStorage.setItem(MAPID, val.mapId);
           router.push("/");

@@ -22,7 +22,7 @@ export const ConstructorNav = () => {
       addToast("Нельзя создать пустую карту", "error");
       e.preventDefault();
     }
-    localStorage.setItem(LOCAL_CARDS, JSON.stringify(gridCards));
+    localStorage.setItem(LOCAL_CARDS, JSON.stringify(gridCards?.map(a => a || [])));
     localStorage.removeItem(MAPID);
     if (userName) localStorage.setItem(CREATOR, userName);
   }
