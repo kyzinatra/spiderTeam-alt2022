@@ -5,7 +5,7 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  flex-shrink: 3;
+  flex-shrink: 2;
   align-items: center;
 }
 

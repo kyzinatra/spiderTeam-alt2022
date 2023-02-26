@@ -18,3 +18,15 @@ export function hasFullStack(cell: TCell): number {
   });
   return res;
 }
+
+export function getEntropy(grid: TGrid) {
+  return grid.reduce((t, cell) => {
+    let result = 0;
+    for (let i = 0; i < cell.length; i++) {
+      for (let j = i + 1; j < cell.length; j++) {
+        if (CARD_VALUES[cell[i].title] < CARD_VALUES[cell[j].title] && !cell[i].removed && !cell[j].removed) result++;
+      }
+    }
+    return t + result;
+  }, 0);
+}

@@ -53,6 +53,29 @@ export const ConstructorNav = () => {
     }
   }
 
+  function CopyCards() {
+    if ("clipboard" in navigator) {
+      navigator.clipboard.writeText(JSON.stringify(gridCards));
+      addToast("Карта успешно скопирована!", "success");
+      return;
+    }
+    try {
+      const input = document.createElement("input");
+      input.style.position = "absolute";
+      input.style.top = "-99999px";
+      input.style.left = "-99999px";
+      input.style.opacity = "0";
+      input.value = JSON.stringify(gridCards);
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand("copy");
+      addToast("Карта успешно скопирована (попытка 2)!", "success");
+      input.remove();
+    } catch (e) {
+      addToast("clipboard не подерживается в вашем браузере", "error");
+    }
+  }
+
   return (
     <ul className={css.constructor__nav}>
       <NavLink href="/" className={css.constructor__button} onClick={GameStartHandler}>
@@ -66,6 +89,13 @@ export const ConstructorNav = () => {
       </NavButton>
       <NavButton className={css.constructor__button} onClick={RemoveCard}>
         Удалить карту
+      </NavButton>
+      <NavButton
+        title="Скопировать информацию о карте для разработчика"
+        className={css.constructor__button}
+        onClick={CopyCards}
+      >
+        Скопировать
       </NavButton>
     </ul>
   );
